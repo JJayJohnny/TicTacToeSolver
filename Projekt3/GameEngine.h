@@ -6,6 +6,7 @@
 class GameEngine {
 public:
 	void GenerateAllMoves(int n, int m, char activePlayer, GameState &state, MyVector &w);
-	void GEN_ALL_POS_MOV();
+	void GEN_ALL_POS_MOV(bool cutOnGameOver);
+	void SOLVE_GAME_STATE();
 	char GetOpponent(char player) const;
 };

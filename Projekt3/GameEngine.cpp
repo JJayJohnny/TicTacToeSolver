@@ -15,7 +15,7 @@ void GameEngine::GenerateAllMoves(int n, int m, char activePlayer, GameState &st
 	}
 }
 
-void GameEngine::GEN_ALL_POS_MOV() {
+void GameEngine::GEN_ALL_POS_MOV(bool cutOnGameOver) {
 	int n, m, k;
 	char activePlayer;
 	//std::cin >> n >> m >> k >> activePlayer;
@@ -24,10 +24,23 @@ void GameEngine::GEN_ALL_POS_MOV() {
 	gs.Load();
 	MyVector w;
 	GenerateAllMoves(n, m, activePlayer, gs, w);
+	if (cutOnGameOver) {
+		for (int i = 0; i < w.GetSize(); i++) {
+			if (w[i].Calculate(activePlayer) == 1) {
+				printf("1\n");
+				w[i].Print();
+				return;
+			}
+		}
+	}
 	//std::cout << w.GetSize() << std::endl;
 	printf("%d\n", w.GetSize());
 	for (int i = 0; i < w.GetSize(); i++)
 		w[i].Print();
+}
+
+void GameEngine::SOLVE_GAME_STATE() {
+
 }
 
 char GameEngine::GetOpponent(char player) const{
