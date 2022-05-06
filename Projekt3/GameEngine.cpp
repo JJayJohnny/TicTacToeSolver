@@ -15,6 +15,21 @@ void GameEngine::GenerateAllMoves(int n, int m, char activePlayer, GameState &st
 	}
 }
 
+void GameEngine::GEN_ALL_POS_MOV() {
+	int n, m, k;
+	char activePlayer;
+	//std::cin >> n >> m >> k >> activePlayer;
+	scanf(" %d %d %d %c", &n, &m, &k, &activePlayer);
+	GameState gs(m, n, k);
+	gs.Load();
+	MyVector w;
+	GenerateAllMoves(n, m, activePlayer, gs, w);
+	//std::cout << w.GetSize() << std::endl;
+	printf("%d\n", w.GetSize());
+	for (int i = 0; i < w.GetSize(); i++)
+		w[i].Print();
+}
+
 char GameEngine::GetOpponent(char player) const{
 	if (player == PLAYER1)
 		return PLAYER2;
