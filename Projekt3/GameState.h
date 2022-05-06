@@ -21,6 +21,6 @@ public:
 	GameState& operator=(GameState& other);
 	~GameState();
 	void Print() const;
-	int Calculate(char activePlayer)const;
+	int Calculate(char activePlayer, char oponent)const;
 	void Load();
 };

@@ -65,13 +65,20 @@ void GameState::Print() const{
 	}
 }
 
-int GameState::Calculate(char activePlayer) const{
+int GameState::Calculate(char activePlayer, char oponent) const{
 	if (CheckRows(activePlayer) == 1)
 		return 1;
 	if (CheckColumns(activePlayer) == 1)
 		return 1;
 	if (CheckDiagonals(activePlayer) == 1)
 		return 1;
+
+	if (CheckRows(oponent) == 1)
+		return -1;
+	if (CheckColumns(oponent) == 1)
+		return -1;
+	if (CheckDiagonals(oponent) == 1)
+		return -1;
 	
 	return 0;
 }

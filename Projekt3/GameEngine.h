@@ -8,5 +8,6 @@ public:
 	void GenerateAllMoves(int n, int m, char activePlayer, GameState &state, MyVector &w);
 	void GEN_ALL_POS_MOV(bool cutOnGameOver);
 	void SOLVE_GAME_STATE();
+	int MinMax(GameState& gs, char activePlayer, char firstPlayer);
 	char GetOpponent(char player) const;
 };
