@@ -83,6 +83,17 @@ int GameState::Calculate(char activePlayer, char oponent) const{
 	return 0;
 }
 
+int GameState::AdvancedCalculate(char activePlayer){
+	if (CheckRows(activePlayer) == 1)
+		return 1;
+	if (CheckColumns(activePlayer) == 1)
+		return 1;
+	if (CheckDiagonals(activePlayer) == 1)
+		return 1;
+	
+	return 0;
+}
+
 int GameState::CheckRows(char activePlayer)const {
 	//check lines
 	for (int i = 0; i < y; i++) {
@@ -157,6 +168,10 @@ int GameState::CheckDiagonals(char activePlayer)const {
 	}
 	return 0;
 }
+
+
+
+
 
 void GameState::Load() {
 	for (int i = 0; i < y; i++)

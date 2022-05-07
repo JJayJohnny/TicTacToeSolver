@@ -10,6 +10,7 @@ private:
 	int CheckRows(char activePlayer)const;
 	int CheckColumns(char activePlayer)const;
 	int CheckDiagonals(char activePlayer)const;
+
 public:
 	int x, y;
 	int k;
@@ -22,5 +23,6 @@ public:
 	~GameState();
 	void Print() const;
 	int Calculate(char activePlayer, char oponent)const;
+	int AdvancedCalculate(char activePlayer);
 	void Load();
 };

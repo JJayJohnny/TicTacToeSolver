@@ -46,24 +46,50 @@ void GameEngine::SOLVE_GAME_STATE() {
 	GameState gs(m, n, k);
 	gs.Load();
 	int result = MinMax(gs, activePlayer, activePlayer);
+		if ((activePlayer == PLAYER1 && result == 1) || (activePlayer == PLAYER2 && result == -1))
+			printf("FIRST_PLAYER_WINS\n");
+		else if ((activePlayer == PLAYER1 && result == -1) || (activePlayer == PLAYER2 && result == 1))
+			printf("SECOND_PLAYER_WINS\n");
+		else
+			printf("BOTH_PLAYERS_TIE\n");
+}
 
-	if ((activePlayer == PLAYER1 && result == 1) || (activePlayer == PLAYER2 && result == -1))
-		printf("FIRST_PLAYER_WINS\n");
-	else if ((activePlayer == PLAYER1 && result == -1) || (activePlayer == PLAYER2 && result == 1))
-		printf("SECOND_PLAYER_WINS\n");
-	else
-		printf("BOTH_PLAYERS_TIE\n");
+bool GameEngine::GuaranteedWin(GameState& gs, char activePlayer, MyVector& possibleNextMoves) {
+	gs.k--;
+	int score = gs.AdvancedCalculate(activePlayer);
+	gs.k++;
+	if (score == 1) {
+		//MyVector possibleNextMoves;
+		//GenerateAllMoves(gs.y, gs.x, activePlayer, gs, possibleNextMoves);
+		int nextMovesWinning = 0;
+		for (int i = 0; i < possibleNextMoves.GetSize(); i++) {
+			if (possibleNextMoves[i].AdvancedCalculate(activePlayer) == 1)
+				nextMovesWinning++;
+			if (nextMovesWinning >= 2)
+				return true;
+		}
+	}
+	
+	return false;
 }
 
 int GameEngine::MinMax(GameState& gs, char activePlayer, char firstPlayer) {
-	int score = gs.Calculate(activePlayer, GetOpponent(activePlayer));
 	MyVector availableMoves;
 	GenerateAllMoves(gs.y, gs.x, activePlayer, gs, availableMoves);
+
+	int score = gs.Calculate(activePlayer, GetOpponent(activePlayer));
 	if (availableMoves.GetSize() == 0) {
 		if (activePlayer == firstPlayer)
 			return score;
 		else
 			return (-1) * score;
+	}
+
+	if (GuaranteedWin(gs, activePlayer, availableMoves)) {
+		if (activePlayer == firstPlayer)
+				return 1;
+			else
+				return -1;
 	}
 
 	if (activePlayer == firstPlayer) {
