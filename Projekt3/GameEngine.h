@@ -9,6 +9,6 @@ public:
 	void GEN_ALL_POS_MOV(bool cutOnGameOver);
 	void SOLVE_GAME_STATE();
 	int MinMax(GameState& gs, char activePlayer, char firstPlayer);
-	bool GuaranteedWin(GameState& gs, char activePlayer, MyVector& possibleNextMoves);
+	bool GuaranteedWin(GameState& gs, char activePlayer);
 	char GetOpponent(char player) const;
 };
